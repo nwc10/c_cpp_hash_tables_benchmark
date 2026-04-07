@@ -122,19 +122,19 @@ template<> struct mlib_dict_oa< blueprint >                                     
 // M*LIB requires the user to reserve two key values for bookkeeping.
 // This process is handled via the oor_equal and oor_set "operators".
 
-#ifdef UINT32_UINT32_MURMUR_ENABLED
+#ifdef UINT64_UINT64_MURMUR_ENABLED
 
-static inline bool mlib_dict_oa_uint32_uint32_murmur_oor_equal( uint32_uint32_murmur::key_type k, unsigned char n )
+static inline bool mlib_dict_oa_uint64_uint64_murmur_oor_equal( uint64_uint64_murmur::key_type k, unsigned char n )
 {
-  return k == std::numeric_limits< uint32_uint32_murmur::key_type >::max() - n;
+  return k == std::numeric_limits< uint64_uint64_murmur::key_type >::max() - n;
 }
 
-static inline void mlib_dict_oa_uint32_uint32_murmur_oor_set( uint32_uint32_murmur::key_type *k, unsigned char n )
+static inline void mlib_dict_oa_uint64_uint64_murmur_oor_set( uint64_uint64_murmur::key_type *k, unsigned char n )
 {
-  *k = std::numeric_limits< uint32_uint32_murmur::key_type >::max() - n;
+  *k = std::numeric_limits< uint64_uint64_murmur::key_type >::max() - n;
 }
 
-MLIB_DICT_OA_SPECIALIZATION( uint32_uint32_murmur )
+MLIB_DICT_OA_SPECIALIZATION( uint64_uint64_murmur )
 
 #endif
 

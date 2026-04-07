@@ -70,17 +70,17 @@ template<> struct stc_hmap< blueprint >                                         
   }                                                                                                          \
 };                                                                                                           \
 
-#ifdef UINT32_UINT32_MURMUR_ENABLED
+#ifdef UINT64_UINT64_MURMUR_ENABLED
 
-#define i_type               stc_uint32_uint32_murmur_table
-#define i_key                uint32_uint32_murmur::key_type
-#define i_val                uint32_uint32_murmur::value_type
-#define i_hash( key )        uint32_uint32_murmur::hash_key( *(key) )
-#define i_eq( key_1, key_2 ) uint32_uint32_murmur::cmpr_keys( *(key_1), *(key_2) )
+#define i_type               stc_uint64_uint64_murmur_table
+#define i_key                uint64_uint64_murmur::key_type
+#define i_val                uint64_uint64_murmur::value_type
+#define i_hash( key )        uint64_uint64_murmur::hash_key( *(key) )
+#define i_eq( key_1, key_2 ) uint64_uint64_murmur::cmpr_keys( *(key_1), *(key_2) )
 #define i_max_load_factor    MAX_LOAD_FACTOR
 #include "stc/hmap.h"
 
-STC_HMAP_SPECIALIZATION( uint32_uint32_murmur )
+STC_HMAP_SPECIALIZATION( uint64_uint64_murmur )
 
 #endif
 

@@ -108,13 +108,13 @@ template<> struct uthash< blueprint >                                           
   }                                                                                          \
 };                                                                                           \
 
-#ifdef UINT32_UINT32_MURMUR_ENABLED
+#ifdef UINT64_UINT64_MURMUR_ENABLED
 
 #undef HASH_KEYCMP
 #define HASH_KEYCMP( a, b, len )                                                                                   \
-!uint32_uint32_murmur::cmpr_keys( *(uint32_uint32_murmur::key_type *)(a), *(uint32_uint32_murmur::key_type *)(b) ) \
+!uint64_uint64_murmur::cmpr_keys( *(uint64_uint64_murmur::key_type *)(a), *(uint64_uint64_murmur::key_type *)(b) ) \
 
-UTHASH_SPECIALIZATION( uint32_uint32_murmur )
+UTHASH_SPECIALIZATION( uint64_uint64_murmur )
 
 #endif
 

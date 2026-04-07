@@ -137,8 +137,8 @@ template<> struct mlib_dict< blueprint >                                        
   }                                                                                          \
 };                                                                                           \
 
-#ifdef UINT32_UINT32_MURMUR_ENABLED
-MLIB_DICT_SPECIALIZATION( uint32_uint32_murmur )
+#ifdef UINT64_UINT64_MURMUR_ENABLED
+MLIB_DICT_SPECIALIZATION( uint64_uint64_murmur )
 #endif
 
 #ifdef UINT64_STRUCT448_MURMUR_ENABLED

@@ -70,16 +70,16 @@ template<> struct cc_lib_map< blueprint >                                       
   }                                                                                                        \
 };                                                                                                         \
 
-#ifdef UINT32_UINT32_MURMUR_ENABLED
+#ifdef UINT64_UINT64_MURMUR_ENABLED
 
-struct cc_uint32_uint32_murmur_key{ uint32_uint32_murmur::key_type data; };
+struct cc_uint64_uint64_murmur_key{ uint64_uint64_murmur::key_type data; };
 
-#define CC_HASH cc_uint32_uint32_murmur_key, { return uint32_uint32_murmur::hash_key( val.data ); }
-#define CC_CMPR cc_uint32_uint32_murmur_key, { return !uint32_uint32_murmur::cmpr_keys( val_1.data, val_2.data ); }
-#define CC_LOAD cc_uint32_uint32_murmur_key, MAX_LOAD_FACTOR
+#define CC_HASH cc_uint64_uint64_murmur_key, { return uint64_uint64_murmur::hash_key( val.data ); }
+#define CC_CMPR cc_uint64_uint64_murmur_key, { return !uint64_uint64_murmur::cmpr_keys( val_1.data, val_2.data ); }
+#define CC_LOAD cc_uint64_uint64_murmur_key, MAX_LOAD_FACTOR
 #include "cc.h"
 
-CC_SPECIALIZATION( uint32_uint32_murmur )
+CC_SPECIALIZATION( uint64_uint64_murmur )
 
 #endif
 

@@ -12,9 +12,9 @@
 
 static inline size_t stbds_hash_bytes( void *p, size_t len, size_t seed )
 {
-  #ifdef UINT32_UINT32_MURMUR_ENABLED
-  if( len == sizeof( uint32_uint32_murmur::key_type ) )
-    return uint32_uint32_murmur::hash_key( *( uint32_uint32_murmur::key_type *)p );
+  #ifdef UINT64_UINT64_MURMUR_ENABLED
+  if( len == sizeof( uint64_uint64_murmur::key_type ) )
+    return uint64_uint64_murmur::hash_key( *( uint64_uint64_murmur::key_type *)p );
   #endif
 
   #ifdef UINT64_STRUCT448_MURMUR_ENABLED
@@ -158,15 +158,15 @@ template<> struct stb_ds_hm_sh< blueprint >                                     
   }                                                                                           \
 };                                                                                            \
 
-#ifdef UINT32_UINT32_MURMUR_ENABLED
+#ifdef UINT64_UINT64_MURMUR_ENABLED
 
-struct stb_ds_hm_sh_uint32_uint32_murmur
+struct stb_ds_hm_sh_uint64_uint64_murmur
 {
-  uint32_uint32_murmur::key_type key;
-  uint32_uint32_murmur::value_type value;
+  uint64_uint64_murmur::key_type key;
+  uint64_uint64_murmur::value_type value;
 };
 
-STBDS_HM_SPECIALIZATION( uint32_uint32_murmur )
+STBDS_HM_SPECIALIZATION( uint64_uint64_murmur )
 
 #endif
 

@@ -76,17 +76,17 @@ template<> struct khash< blueprint >                                            
   }                                                                                                     \
 };                                                                                                      \
 
-#ifdef UINT32_UINT32_MURMUR_ENABLED
+#ifdef UINT64_UINT64_MURMUR_ENABLED
 
 KHASH_INIT(
-  uint32_uint32_murmur, uint32_uint32_murmur::key_type,
-  uint32_uint32_murmur::value_type,
+  uint64_uint64_murmur, uint64_uint64_murmur::key_type,
+  uint64_uint64_murmur::value_type,
   true,
-  uint32_uint32_murmur::hash_key,
-  uint32_uint32_murmur::cmpr_keys
+  uint64_uint64_murmur::hash_key,
+  uint64_uint64_murmur::cmpr_keys
 )
 
-KHASH_SPECIALIZATION( uint32_uint32_murmur )
+KHASH_SPECIALIZATION( uint64_uint64_murmur )
 
 #endif
 

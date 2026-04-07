@@ -75,17 +75,17 @@ template<> struct verstable< blueprint >                                        
   }                                                                                                         \
 };                                                                                                          \
 
-#ifdef UINT32_UINT32_MURMUR_ENABLED
+#ifdef UINT64_UINT64_MURMUR_ENABLED
 
-#define NAME     verstable_uint32_uint32_murmur_table
-#define KEY_TY   uint32_uint32_murmur::key_type
-#define VAL_TY   uint32_uint32_murmur::value_type
-#define HASH_FN  uint32_uint32_murmur::hash_key
-#define CMPR_FN  uint32_uint32_murmur::cmpr_keys
+#define NAME     verstable_uint64_uint64_murmur_table
+#define KEY_TY   uint64_uint64_murmur::key_type
+#define VAL_TY   uint64_uint64_murmur::value_type
+#define HASH_FN  uint64_uint64_murmur::hash_key
+#define CMPR_FN  uint64_uint64_murmur::cmpr_keys
 #define MAX_LOAD MAX_LOAD_FACTOR
 #include "verstable.h"
 
-VERSTABLE_SPECIALIZATION( uint32_uint32_murmur )
+VERSTABLE_SPECIALIZATION( uint64_uint64_murmur )
 
 #endif
 

@@ -4,13 +4,13 @@
 
 #include <numeric>
 
-#define UINT32_UINT32_MURMUR_ENABLED
+#define UINT64_UINT64_MURMUR_ENABLED
 
-struct uint32_uint32_murmur
+struct uint64_uint64_murmur
 {
-  using key_type = uint32_t;
-  using value_type = uint32_t;
-  static constexpr const char *label = "32-bit integer key, 32-bit value";
+  using key_type = uint64_t;
+  using value_type = uint64_t;
+  static constexpr const char *label = "64-bit integer key, 64-bit value";
   
   // MurmurHash3’s 64-bit finalizer.
   static uint64_t hash_key( const key_type &key )
