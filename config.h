@@ -61,6 +61,7 @@
 // #define BLUEPRINT_16
 
 // Shim slots.
+#if 0
 #define SHIM_1 absl_flat_hash_map
 #define SHIM_2 ankerl_unordered_dense
 #define SHIM_3 boost_unordered_flat_map
@@ -68,10 +69,13 @@
 #define SHIM_5 ska_bytell_hash_map
 #define SHIM_6 std_unordered_map
 #define SHIM_7 tsl_robin_map
+#endif
 #define SHIM_8 cc_lib_map
 #define SHIM_9 khash
 #define SHIM_10 mlib_dict
+#if 0
 #define SHIM_11 mlib_dict_oa
+#endif
 #define SHIM_12 stb_ds_hm_sh // stb_ds does not automatically respect MAX_LOAD_FACTOR (the header must be modified).
 #define SHIM_13 stc_hmap
 #define SHIM_14 uthash
