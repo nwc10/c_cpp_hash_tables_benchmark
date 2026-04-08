@@ -45,7 +45,7 @@
 // Blueprint slots.
 #define BLUEPRINT_1 uint64_uint64_murmur
 // #define BLUEPRINT_2 uint64_struct64_murmur
-#define BLUEPRINT_3 cstring_uint64_fnv1a
+// #define BLUEPRINT_3 cstring_uint64_fnv1a
 // #define BLUEPRINT_4
 // #define BLUEPRINT_5
 // #define BLUEPRINT_6
