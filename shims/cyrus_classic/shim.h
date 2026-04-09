@@ -1,7 +1,9 @@
 #define EXPORTED
 
-static inline void *xmalloc(size_t size)
-{
+namespace cyrus_classic_C {
+
+  static inline void *xmalloc(size_t size)
+  {
     void *ret;
 
     ret = malloc(size);
@@ -9,35 +11,36 @@ static inline void *xmalloc(size_t size)
 
     abort();
     return 0; /*NOTREACHED*/
-}
+  }
 
-static inline void *xzmalloc(size_t size)
-{
+  static inline void *xzmalloc(size_t size)
+  {
     void *ret = xmalloc(size);
     memset(ret, 0, size);
     return ret;
-}
+  }
 
-struct mpool *new_mpool(size_t size) {
-  return NULL;
-}
+  struct mpool *new_mpool(size_t size) {
+    return NULL;
+  }
 
-static inline void free_mpool(struct mpool *pool) {
-}
+  static inline void free_mpool(struct mpool *pool) {
+  }
 
-static inline void *mpool_malloc(struct mpool *pool, size_t size) {
-  return NULL;
-}
+  static inline void *mpool_malloc(struct mpool *pool, size_t size) {
+    return NULL;
+  }
 
-static inline char *mpool_strdup(struct mpool *pool, const char *str) {
-  return NULL;
-}
+  static inline char *mpool_strdup(struct mpool *pool, const char *str) {
+    return NULL;
+  }
 
-static inline char *mpool_strndup(struct mpool *pool, const char *str, size_t n) {
-  return NULL;
-}
+  static inline char *mpool_strndup(struct mpool *pool, const char *str, size_t n) {
+    return NULL;
+  }
 
 #include "hashu64.h"
+}
 
 template< typename > struct cyrus_classic
 {
@@ -68,16 +71,16 @@ template< typename > struct cyrus_classic
    hash top level array.
 */
 
-#define CYRUS_SPECIALIZATION( blueprint, prefix )                       \
+#define CYRUS_SPECIALIZATION( blueprint, prefix, space )                \
                                                                         \
   template<> struct cyrus_classic< blueprint >                          \
   {                                                                     \
                                                                         \
-    using table_type = prefix##_table *;                                \
+    using table_type = space::prefix##_table *;                         \
                                                                         \
     class iterator {                                                    \
     public:                                                             \
-    prefix##_iter true_iter;                                            \
+      space::prefix##_iter true_iter;                                   \
                                                                         \
     iterator() {                                                        \
       true_iter.curr = NULL;                                            \
@@ -105,32 +108,32 @@ template< typename > struct cyrus_classic
     static table_type create_table()                                    \
     {                                                                   \
       table_type table = (table_type) calloc(sizeof(*table), 1);        \
-      return construct_##prefix##_table( table, KEY_COUNT / 2, 0 );     \
+      return space::construct_##prefix##_table( table, KEY_COUNT / 2, 0 ); \
     }                                                                   \
                                                                         \
     static iterator find( table_type &table, const blueprint::key_type &key ) \
     {                                                                   \
       iterator result;                                                  \
-      prefix##_lookup( key, table, &result.true_iter );                 \
+      space::prefix##_lookup( key, table, &result.true_iter );          \
       return result;                                                    \
     }                                                                   \
                                                                         \
     static void insert( table_type &table, const blueprint::key_type &key ) \
     {                                                                   \
-      prefix##_insert( key, (void *)blueprint::value_type(), table );   \
+      space::prefix##_insert( key, (void *)blueprint::value_type(), table ); \
     }                                                                   \
                                                                         \
     static void erase( table_type &table, const blueprint::key_type &key ) \
     {                                                                   \
-      prefix##_del( key, table );                                       \
+      space::prefix##_del( key, table );                                \
     }                                                                   \
                                                                         \
     static iterator begin_itr( table_type &table )                      \
     {                                                                   \
       iterator result;                                                  \
       result.true_iter.table = table;                                   \
-      prefix##_iter_reset( &result.true_iter );                         \
-      prefix##_iter_next( &result.true_iter );                          \
+      space::prefix##_iter_reset( &result.true_iter );                  \
+      space::prefix##_iter_next( &result.true_iter );                   \
       return result;                                                    \
     }                                                                   \
                                                                         \
@@ -141,7 +144,7 @@ template< typename > struct cyrus_classic
                                                                         \
     static void increment_itr( table_type &table, iterator &itr )       \
     {                                                                   \
-      prefix##_iter_next( &itr.true_iter );                             \
+      space::prefix##_iter_next( &itr.true_iter );                      \
     }                                                                   \
                                                                         \
     static const blueprint::key_type &get_key_from_itr( table_type &table, iterator &itr ) \
@@ -156,14 +159,14 @@ template< typename > struct cyrus_classic
                                                                         \
     static void destroy_table( table_type &table )                      \
     {                                                                   \
-      free_##prefix##_table( table, 0 );                                \
+      space::free_##prefix##_table( table, 0 );                         \
       free( table );                                                    \
     }                                                                   \
   };                                                                    \
 
 #ifdef UINT64_UINT64_MURMUR_ENABLED
 
-CYRUS_SPECIALIZATION( uint64_uint64_murmur, hashu64 )
+CYRUS_SPECIALIZATION( uint64_uint64_murmur, hashu64, cyrus_classic_C )
 
 #endif
 
@@ -175,6 +178,6 @@ CYRUS_SPECIALIZATION( uint64_uint64_murmur, hashu64 )
 
 #ifdef CSTRING_UINT64_FNV1A_ENABLED
 
-CYRUS_SPECIALIZATION( cstring_uint64_fnv1a, hash )
+CYRUS_SPECIALIZATION( cstring_uint64_fnv1a, hash, cyrus_classic_C )
 
 #endif
