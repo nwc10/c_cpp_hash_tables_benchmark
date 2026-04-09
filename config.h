@@ -81,3 +81,4 @@
 #define SHIM_14 uthash
 #define SHIM_15 verstable
 // #define SHIM_15
+#define SHIM_16 cyrus_classic
